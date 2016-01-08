@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <title>Github Authentication Example</title>
+  <!--- This example uses jQuery: -->
+  <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+
+  <!-- Make sure to include Nelify's authentiation library -->
+  <script src="https://app.netlify.com/authentication.js"></script>
+
+  <script>
+    $(function() {
+      $("#login").on("click", function(e) {
+        e.preventDefault();
+        netlify.authenticate({provider:"github", scope: "user"}, function(err, data) {
+          if (err) {
+            return $("#output").text("Error Authenticating with Github: " + err);
+          }
+          $("#output").text("Authenticated with Github. Access Token: " + data.token);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Github Auth Demo:</h1>
+  <p><a href="#" id="login">Authenticate</a></p>
+  <p id="output"></p>
+</body>
+</html>
